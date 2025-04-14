@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
+// Define the types for the data
 type DashboardData = {
   month: string;
   expenses: number;
+};
+
+type Transaction = {
+  date: string;  // Assuming date is a string in ISO format or something similar
+  amount: number; // Assuming the amount is a number
 };
 
 const Dashboard = () => {
@@ -11,10 +17,10 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('/api/transactions');
-      const transactions = await response.json();
+      const transactions: Transaction[] = await response.json(); // Add Transaction[] type here
 
       // Reduce the transactions to get the total expenses per month
-      const monthlyExpenses = transactions.reduce((acc: Record<string, number>, transaction: any) => {
+      const monthlyExpenses = transactions.reduce((acc: Record<string, number>, transaction: Transaction) => {
         const month = new Date(transaction.date).toLocaleString('default', { month: 'long' });
 
         if (!acc[month]) acc[month] = 0;
@@ -24,7 +30,7 @@ const Dashboard = () => {
       }, {});
 
       // Convert the monthly expenses to the correct format
-      const formattedData = Object.entries(monthlyExpenses).map(([month, expenses]) => ({
+      const formattedData: DashboardData[] = Object.entries(monthlyExpenses).map(([month, expenses]) => ({
         month,
         expenses: Number(expenses), // Ensure expenses is a number
       }));
