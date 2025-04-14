@@ -1,6 +1,24 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
-const MonthlyExpensesChart = ({ data }: any) => {
+type ExpenseData = {
+  month: string;
+  expenses: number;
+};
+
+type MonthlyExpensesChartProps = {
+  data: ExpenseData[];
+};
+
+const MonthlyExpensesChart = ({ data }: MonthlyExpensesChartProps) => {
   return (
     <ResponsiveContainer width="100%" height={400}>
       <BarChart data={data}>
