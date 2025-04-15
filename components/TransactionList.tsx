@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react';
 
+type Transaction = {
+  _id: string;
+  amount: number;
+  description: string;
+  category: string;
+  date: string;
+};
+
 const TransactionList = () => {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -17,7 +25,7 @@ const TransactionList = () => {
     <div>
       <h2>Transactions</h2>
       <ul>
-        {transactions.map((transaction: any) => (
+        {transactions.map((transaction) => (
           <li key={transaction._id}>
             {transaction.amount} - {transaction.description} - {transaction.category} - {transaction.date}
           </li>

@@ -5,7 +5,7 @@ const TransactionForm = () => {
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const transaction = { amount, date, description };
 
@@ -29,7 +29,7 @@ const TransactionForm = () => {
           type="number"
           id="amount"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAmount(e.target.value)}
           placeholder="Enter amount"
         />
       </div>
@@ -40,7 +40,7 @@ const TransactionForm = () => {
           type="date"
           id="date"
           value={date}
-          onChange={(e) => setDate(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDate(e.target.value)}
         />
       </div>
 
@@ -50,7 +50,7 @@ const TransactionForm = () => {
           type="text"
           id="description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
           placeholder="Enter description"
         />
       </div>
